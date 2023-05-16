@@ -1,4 +1,4 @@
-# atividade-estrutura-de-dados
+# estrutura-de-dados-pilha
 
 Atividade Prática
 
