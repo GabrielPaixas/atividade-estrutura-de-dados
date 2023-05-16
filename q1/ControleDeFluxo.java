@@ -1,6 +1,6 @@
 public class ControleDeFluxo {
 
-    public static void carregarCaminhao(Pilha<Caminhao> pilhaCaminhaoes, Pilha<Carga> pilhaCargas,
+    public void carregarCaminhao(Pilha<Caminhao> pilhaCaminhaoes, Pilha<Carga> pilhaCargas,
             Pilha<Caminhao> carregados) {
         if (pilhaCaminhaoes.isEmpty()) {
             System.out.println("Sem caminhoes disponiveis");
@@ -34,35 +34,13 @@ public class ControleDeFluxo {
         System.out.println("Nenhum caminhao suportou a carga");
     }
 
-    public static void main(String[] args) {
-        Pilha<Caminhao> caminhoes = new Pilha<>();
-        Pilha<Caminhao> carregados = new Pilha<>();
-        Pilha<Carga> cargas = new Pilha<>();
-
-        Caminhao x = new Caminhao("qwe123", 500, 520, "januario", "bau");
-        Caminhao y = new Caminhao("qwe123", 500, 820, "linaudo", "bau");
-        Caminhao z = new Caminhao("qwe123", 500, 920, "ze", "bau");
-
-        Carga carga1 = new Carga("carregamento de madeira", "Media", 500);
-        Carga carga2 = new Carga("carregamento de graos", "Media", 800);
-        Carga carga3 = new Carga("carregamento de metais", "Media", 900);
-
-        caminhoes.push(x);
-        caminhoes.push(y);
-        caminhoes.push(z);
-
-        cargas.push(carga1);
-        cargas.push(carga2);
-        cargas.push(carga3);
-
-        carregarCaminhao(caminhoes, cargas, carregados);
-        carregarCaminhao(caminhoes, cargas, carregados);
-        carregarCaminhao(caminhoes, cargas, carregados);
-        // carregarCaminhao(caminhoes, cargas, carregados);
-
-        System.out.println(carregados.size());
-
-        System.out.println("\n\n");
-        System.out.println(caminhoes.size());
+    public void separarCargas(Pilha<Carga> cargas, Pilha<Carga> baixaPrioridade, Pilha<Carga> altaPrioridade){
+        while(cargas.isEmpty() != true){
+            if(cargas.top().getPrioridade().equals("alta")){
+                altaPrioridade.push(cargas.pop());
+            }else{
+                baixaPrioridade.push(cargas.pop()); 
+            }
+        }
     }
 }
