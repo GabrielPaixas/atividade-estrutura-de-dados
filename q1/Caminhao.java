@@ -14,6 +14,8 @@ public class Caminhao {
         this.tipoCarroceria = tipoCarroceria;
     }
 
+    public Caminhao(){}
+
     public String getPlaca() {
         return this.placa;
     }

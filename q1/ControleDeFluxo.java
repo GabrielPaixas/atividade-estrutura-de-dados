@@ -12,7 +12,7 @@ public class ControleDeFluxo {
         }
 
         Pilha<Caminhao> tempCaminhao = new Pilha<>();
-        while (pilhaCaminhaoes.isEmpty() != true) {
+        while (!pilhaCaminhaoes.isEmpty()) {
             if (pilhaCaminhaoes.top().getCapacidade() < pilhaCargas.top().getPeso()) {
                 tempCaminhao.push(pilhaCaminhaoes.pop());
             } else {
@@ -20,27 +20,46 @@ public class ControleDeFluxo {
                         + pilhaCargas.top().getDescricaoCarga());
                 pilhaCaminhaoes.top().setCarga(pilhaCargas.pop());
                 carregados.push(pilhaCaminhaoes.pop());
-                while (tempCaminhao.isEmpty() != true) {
+                while (!tempCaminhao.isEmpty()) {
                     pilhaCaminhaoes.push(tempCaminhao.pop());
                 }
                 return;
             }
         }
 
-        while (tempCaminhao.isEmpty() != true) {
+        while (!tempCaminhao.isEmpty()) {
             pilhaCaminhaoes.push(tempCaminhao.pop());
         }
 
         System.out.println("Nenhum caminhao suportou a carga");
     }
 
-    public void separarCargas(Pilha<Carga> cargas, Pilha<Carga> baixaPrioridade, Pilha<Carga> altaPrioridade){
-        while(cargas.isEmpty() != true){
-            if(cargas.top().getPrioridade().equals("alta")){
+    public void separarCargas(Pilha<Carga> cargas, Pilha<Carga> baixaPrioridade, Pilha<Carga> altaPrioridade) {
+        while (!cargas.isEmpty()) {
+            if (cargas.top().getPrioridade().equals("alta")) {
                 altaPrioridade.push(cargas.pop());
-            }else{
-                baixaPrioridade.push(cargas.pop()); 
+            } else {
+                baixaPrioridade.push(cargas.pop());
             }
+        }
+    }
+
+    public void organizarCaminhoes(Pilha<Caminhao> caminhoes) {
+        Pilha<Caminhao> tempCaminhao = new Pilha<>();
+
+        while (!caminhoes.isEmpty()){
+            Caminhao capacidade = new Caminhao();
+            capacidade = caminhoes.pop();
+
+            while(!tempCaminhao.isEmpty() && tempCaminhao.top().getCapacidade() > capacidade.getCapacidade()){
+                caminhoes.push(tempCaminhao.pop());
+            }
+
+            tempCaminhao.push(capacidade);
+        }
+
+        while (!tempCaminhao.isEmpty()){
+            caminhoes.push(tempCaminhao.pop());
         }
     }
 }
