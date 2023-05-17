@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 import java.util.EmptyStackException;
-import java.util.List;
 
 public class Pilha<T> {
-    private List<T> elementos;
+    private ArrayList<T> elementos;
 
     public Pilha() {
         elementos = new ArrayList<>();
