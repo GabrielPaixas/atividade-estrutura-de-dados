@@ -1,5 +1,3 @@
-package Q3;
-
 public class Nota {
     private String notas;
 

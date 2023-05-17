@@ -1,12 +1,36 @@
-package q4;
-
-/*Na sua estrutura, MagicCards do tipo terreno,
-criatura, encantamento, artefato, planeswalker ou feitiço só podem ser colocadas na
-pilha se a pilha estiver vazia. MagicCards de Instantâneas, Habilidades ativadas ou
-disparadas podem ser adicionadas na pilha a qualquer momento. */
-
 public class Baralho {
-    public void colocarCartas(MagicCard card, Pilha<MagicCard> baralho){
-        
+    public void colocarCarta(MagicCard card, Pilha<MagicCard> baralho){
+        if(card.getType().equals("terreno") || card.getType().equals("criatura") 
+        || card.getType().equals("encantamento") || card.getType().equals("artefato")
+        || card.getType().equals("planeswalker") || card.getType().equals("feitiço"))
+        {
+            if(!baralho.isEmpty()){
+                System.out.println("\nBaralho precisa estar vazio para receber esse tipo de carta!");
+            }else{
+                baralho.push(card);
+                System.out.println("\nCarata lançada:\n");
+                System.out.println(card.toString());
+            }
+        }else{
+            baralho.push(card);
+            System.out.println("Carata lançada:\n");
+            System.out.println(card.toString());
+        }
     }
+
+    public void removerCartaExpecifica(String nome, Pilha<MagicCard> baralho){
+        Pilha<MagicCard> temp = new Pilha<>();
+
+        while(!baralho.isEmpty()){
+            if(baralho.top().getName().equalsIgnoreCase(nome)){
+                baralho.pop();
+            }else{
+                temp.push(baralho.pop());
+            }
+        }
+        while(!temp.isEmpty()){
+            baralho.push(temp.pop());
+        }
+    }
+
 }
